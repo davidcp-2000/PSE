@@ -1,0 +1,8 @@
+CREATE TABLE hoteles (id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY, nombre VARCHAR(50) not null,ciudad VARCHAR(50) not null,numHabitaciones INTEGER not null, precioHabitacion float not null,emailEmpresa VARCHAR(200) not null );
+CREATE TABLE grupos (id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY, emailusuarios VARCHAR(200) not null,rol VARCHAR(13) not null);
+CREATE TABLE usuarios (emailusuarios VARCHAR(200) not null PRIMARY KEY, password VARCHAR(50) not null, nombre VARCHAR(200) not null,telefono VARCHAR(9) not null,dni VARCHAR(9),fechanacimiento Date,capitalsocial float,domiciliosocial VARCHAR(200),cif VARCHAR(9),aceptada bool);
+CREATE TABLE reserva (id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY, fechanacimiento Date not null,hotel integer not null, tarjeta VARCHAR(16) not null,emailusuarios VARCHAR(200) not null);
+
+
+
+
