@@ -6,6 +6,7 @@
 package com.david.hoteling.rest;
 
 import java.util.Set;
+import javax.inject.Named;
 import javax.ws.rs.core.Application;
 
 /**
@@ -13,6 +14,7 @@ import javax.ws.rs.core.Application;
  * @author parra
  */
 @javax.ws.rs.ApplicationPath("webresources")
+@Named
 public class ApplicationConfig extends Application {
 
     @Override
