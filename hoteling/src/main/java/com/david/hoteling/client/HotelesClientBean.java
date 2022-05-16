@@ -6,6 +6,8 @@
 package com.david.hoteling.client;
 
 import com.david.hoteling.entities.Hoteles;
+import com.david.hoteling.json.HotelReader;
+import com.david.hoteling.json.HotelWriter;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
@@ -13,7 +15,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -45,9 +49,33 @@ public class HotelesClientBean {
                 .get(Hoteles[].class);
     }
     public void deleteHotel() {
-        target.path("{idHotel}")
-                .resolveTemplate("idHotel", bean.idHoteles)
+        target.path("{idHoteles}")
+                .resolveTemplate("idHoteles", bean.getIdHoteles())
                 .request()
                 .delete();
+    }
+    public Hoteles getHotel() {
+        Hoteles m = target
+                .register(HotelReader.class)
+
+                .path("{idHoteles}")
+                .resolveTemplate("idHoteles", bean.getIdHoteles())
+                .request(MediaType.APPLICATION_JSON)
+                .get(Hoteles.class);
+        return m;
+    }
+   
+    
+    public void addHotel() {
+        Hoteles h = new Hoteles();
+        h.setId(3);
+        h.setNombre(bean.getNombreHoteles());
+        h.setCiudad(bean.getCiudadHoteles());
+        h.setNumhabitaciones(12);
+        h.setPreciohabitacion(12);
+        h.setEmailempresa("prueba@gmail.com");
+        target.register(HotelWriter.class)
+                .request()
+                .post(Entity.entity(h, MediaType.APPLICATION_JSON));
     }
 }

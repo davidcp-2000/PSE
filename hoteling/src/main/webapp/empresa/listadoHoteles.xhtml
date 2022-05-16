@@ -19,56 +19,10 @@
                         </c:forEach>
                     </h:selectOneRadio>
                     <p:commandButton value="Detalles" action="/empresa/informacionHotel.xhtml" />
-                    <p:commandButton value="Añadir nuevo hotel" action="/empresa/informacionHotel.xhtml" />
+                    <p:commandButton value="Añadir nueva pelicula" action="/empresa/nuevoHotel.xhtml" />
 
                 </h:form>
-                <f:view>
-                    <h:form>
-                        <h1><h:outputText value="Listado de hoteles registrado"/></h1>
-                        <p:dataTable value="#{hotelesClientBean.hoteles}" var="item">
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nombre"/>
-                                </f:facet>
-                                <h:outputText value="#{item.nombre}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Ciudad"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ciudad}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Numhabitaciones"/>
-                                </f:facet>
-                                <h:outputText value="#{item.numhabitaciones}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Preciohabitacion"/>
-                                </f:facet>
-                                <h:outputText value="#{item.preciohabitacion}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Emailempresa"/>
-                                </f:facet>
-                                <h:outputText value="#{item.emailempresa}"/>
-                            </p:column>
-                            
-                        </p:dataTable>
-                    </h:form>
-                    
-                </f:view>
 
-                
             </ui:define>
 
         </ui:composition>

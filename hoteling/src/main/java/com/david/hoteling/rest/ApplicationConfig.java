@@ -31,6 +31,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.david.hoteling.json.HotelReader.class);
+        resources.add(com.david.hoteling.json.HotelWriter.class);
         resources.add(com.david.hoteling.rest.GruposFacadeREST.class);
         resources.add(com.david.hoteling.rest.HotelesFacadeREST.class);
         resources.add(com.david.hoteling.rest.ReservaFacadeREST.class);

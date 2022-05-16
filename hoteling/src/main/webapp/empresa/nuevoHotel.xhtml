@@ -3,26 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <h1>Añadir nuevo hotel</h1>
-                <h:form>
+              <h:form>
                     <table cellpadding="5" cellspacing="5">
                         <tr>
-                            <th align="left">Título:</th>
-                            <td><h:inputText value="#{movieBackingBean.movieName}"/> </td>
+                            <th align="left">Nombre:</th>
+                            <td><h:inputText value="#{hotelesBackingBean.nombreHoteles}"/> </td>
                         </tr>
                         <tr>
-                            <th align="left">Actores:</th>
-                            <td><h:inputText value="#{movieBackingBean.actors}"/></td>
+                            <th align="left">Ciudad:</th>
+                            <td><h:inputText value="#{hotelesBackingBean.ciudadHoteles}"/></td>
                         </tr>
                     </table>
-                    <p:commandButton value="Añadir" action="movies" actionListener="#{movieClientBean.addMovie()}"/>
+                  <p:commandButton value="Añadir" action="listadoHoteles" actionListener="#{hotelesClientBean.addHotel()}"/>
                 </h:form>
             </ui:define>
 
