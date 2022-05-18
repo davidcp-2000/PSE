@@ -3,16 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <h1>Nuevos hoteles</h1>
-              <h:form>
+                <h1>Modificar hoteles</h1>
+               <h:form>
                     <table cellpadding="5" cellspacing="5">
                         <tr>
                             <th align="left">Nombre:</th>
@@ -31,7 +30,7 @@
                             <td><h:inputText value="#{hotelesBackingBean.precioHabitacionHoteles}"/></td>
                         </tr>
                     </table>
-                  <p:commandButton value="Añadir" action="listadoHoteles" actionListener="#{hotelesClientBean.addHotel()}"/>
+                   <p:commandButton value="Añadir" action="listadoHoteles" actionListener="#{hotelesClientBean.modificarHotel()}"/>
                 </h:form>
             </ui:define>
 

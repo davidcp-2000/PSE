@@ -61,11 +61,10 @@ public class HotelReader implements MessageBodyReader<Hoteles>{
                             hotel.setNumhabitaciones(parser.getInt());
                             break;
                         case "preciohabitacion":
-                            String precio=parser.getString();
-                            hotel.setPreciohabitacion(Double.parseDouble(precio));
+                            hotel.setPreciohabitacion(Double.parseDouble(parser.getString()));
                             break;
                         case "emailempresa":
-                            hotel.setCiudad(parser.getString());
+                            hotel.setEmailempresa(parser.getString());
                             break;
                         default:
                             break;

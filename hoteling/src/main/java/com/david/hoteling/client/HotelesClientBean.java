@@ -57,7 +57,6 @@ public class HotelesClientBean {
     public Hoteles getHotel() {
         Hoteles m = target
                 .register(HotelReader.class)
-
                 .path("{idHoteles}")
                 .resolveTemplate("idHoteles", bean.getIdHoteles())
                 .request(MediaType.APPLICATION_JSON)
@@ -68,14 +67,29 @@ public class HotelesClientBean {
     
     public void addHotel() {
         Hoteles h = new Hoteles();
-        h.setId(3);
+        h.setId(1);
         h.setNombre(bean.getNombreHoteles());
         h.setCiudad(bean.getCiudadHoteles());
-        h.setNumhabitaciones(12);
-        h.setPreciohabitacion(12);
-        h.setEmailempresa("prueba@gmail.com");
+        h.setNumhabitaciones(bean.getNumHabitacionesHoteles());
+        h.setPreciohabitacion(bean.getPrecioHabitacionHoteles());
+        h.setEmailempresa("prueba2@gmail.com");
         target.register(HotelWriter.class)
                 .request()
                 .post(Entity.entity(h, MediaType.APPLICATION_JSON));
+    }
+    
+    public void modificarHotel() {
+        Hoteles h = new Hoteles();
+        h.setId(bean.getIdHoteles());
+        h.setNombre(bean.getNombreHoteles());
+        h.setCiudad(bean.getCiudadHoteles());
+        h.setNumhabitaciones(bean.getNumHabitacionesHoteles());
+        h.setPreciohabitacion(bean.getPrecioHabitacionHoteles());
+        h.setEmailempresa("prueba2@gmail.com");
+        target.register(HotelWriter.class)
+                .path("{id}")
+                .resolveTemplate("id", bean.getIdHoteles())
+                .request(MediaType.APPLICATION_JSON)
+                .put(Entity.entity(h, MediaType.APPLICATION_JSON));
     }
 }

@@ -12,6 +12,7 @@
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
+                <h1>Listado de hoteles</h1>
                 <h:form>
                     <h:selectOneRadio value="#{hotelesBackingBean.idHoteles}" layout="pageDirection">
                         <c:forEach items="#{hotelesClientBean.hoteles}" var="m">
@@ -19,8 +20,8 @@
                         </c:forEach>
                     </h:selectOneRadio>
                     <p:commandButton value="Detalles" action="/empresa/informacionHotel.xhtml" />
-                    <p:commandButton value="Añadir nueva pelicula" action="/empresa/nuevoHotel.xhtml" />
-
+                    <p:commandButton value="Añadir nueva Hotel" action="/empresa/nuevoHotel.xhtml" />
+                    <p:commandButton value="Modificar Hotel" action="/empresa/modificarHotel.xhtml" />
                 </h:form>
 
             </ui:define>
