@@ -12,17 +12,77 @@
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <h1>Listado de hoteles</h1>
-                <h:form>
-                    <h:selectOneRadio value="#{hotelesBackingBean.idHoteles}" layout="pageDirection">
-                        <c:forEach items="#{hotelesClientBean.hoteles}" var="m">
-                            <f:selectItem itemValue="#{m.id}" itemLabel="#{m.nombre}"/>
-                        </c:forEach>
-                    </h:selectOneRadio>
-                    <p:commandButton value="Detalles" action="/empresa/informacionHotel.xhtml" />
-                    <p:commandButton value="Añadir nueva Hotel" action="/empresa/nuevoHotel.xhtml" />
-                    <p:commandButton value="Modificar Hotel" action="/empresa/modificarHotel.xhtml" />
-                </h:form>
+                
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="Listado de hoteles"/></h1>
+                        <p:dataTable id="table" value="#{hotelesClientBean.hoteles}"  var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Ciudad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ciudad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Numero de Habitaciones"/>
+                                </f:facet>
+                                <h:outputText value="#{item.numhabitaciones}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="precio por habitacion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.preciohabitacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="EmailEmpresa"/>
+                                </f:facet>
+                                <h:outputText value="#{item.emailempresa}" />
+                            </p:column>
+                            
+                            
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+                <f:view>
+                    <h:form>
+                        <h:dataTable value="hola" var="item">
+                            <h:column>
+                                <h2><h:outputText value="Escoja una opcion"/></h2>
+                            </h:column>
+                            <h:column>
+                                <h:selectOneMenu id="questionStatus" value="#{hotelesBackingBean.idHoteles}" > 
+                                    <c:forEach items="#{hotelesClientBean.hoteles}" var="m">
+                                        <f:selectItem itemValue="#{m.id}" itemLabel="#{m.id}" />
+                                    </c:forEach>
+                                </h:selectOneMenu>
+                            </h:column> 
+                            <h:column>
+                                <p:commandButton value="Moficar" action="modificarHotel.xhtml" />
+                                <p:commandButton value="Borrar" action="/empresa/listadoHotel.xhtml" actionListener="#{hotelesClientBean.deleteHotel()}"/>
+                                
+                            </h:column>
+                            <h:column>
+                                <p:commandButton value="Crear Oferta"  action="nuevoHotel.xhtml" immediate="true"/>
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
 
             </ui:define>
 
