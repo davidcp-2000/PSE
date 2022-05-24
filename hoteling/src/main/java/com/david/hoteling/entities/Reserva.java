@@ -32,10 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Reserva.findAll", query = "SELECT r FROM Reserva r"),
     @NamedQuery(name = "Reserva.findById", query = "SELECT r FROM Reserva r WHERE r.id = :id"),
-    @NamedQuery(name = "Reserva.findByFechanacimiento", query = "SELECT r FROM Reserva r WHERE r.fechanacimiento = :fechanacimiento"),
     @NamedQuery(name = "Reserva.findByHotel", query = "SELECT r FROM Reserva r WHERE r.hotel = :hotel"),
     @NamedQuery(name = "Reserva.findByTarjeta", query = "SELECT r FROM Reserva r WHERE r.tarjeta = :tarjeta"),
-    @NamedQuery(name = "Reserva.findByEmailusuarios", query = "SELECT r FROM Reserva r WHERE r.emailusuarios = :emailusuarios")})
+    @NamedQuery(name = "Reserva.findByEmailusuarios", query = "SELECT r FROM Reserva r WHERE r.emailusuarios = :emailusuarios"),
+    @NamedQuery(name = "Reserva.findByFecha", query = "SELECT r FROM Reserva r WHERE r.fecha = :fecha")})
 public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,11 +44,6 @@ public class Reserva implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "fechanacimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechanacimiento;
     @Basic(optional = false)
     @NotNull
     @Column(name = "hotel")
@@ -63,6 +58,11 @@ public class Reserva implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "emailusuarios")
     private String emailusuarios;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
     public Reserva() {
     }
@@ -71,12 +71,12 @@ public class Reserva implements Serializable {
         this.id = id;
     }
 
-    public Reserva(Integer id, Date fechanacimiento, int hotel, String tarjeta, String emailusuarios) {
+    public Reserva(Integer id, int hotel, String tarjeta, String emailusuarios, Date fecha) {
         this.id = id;
-        this.fechanacimiento = fechanacimiento;
         this.hotel = hotel;
         this.tarjeta = tarjeta;
         this.emailusuarios = emailusuarios;
+        this.fecha = fecha;
     }
 
     public Integer getId() {
@@ -85,14 +85,6 @@ public class Reserva implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Date getFechanacimiento() {
-        return fechanacimiento;
-    }
-
-    public void setFechanacimiento(Date fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
     }
 
     public int getHotel() {
@@ -117,6 +109,14 @@ public class Reserva implements Serializable {
 
     public void setEmailusuarios(String emailusuarios) {
         this.emailusuarios = emailusuarios;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     @Override

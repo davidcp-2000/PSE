@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Hoteles.findById", query = "SELECT h FROM Hoteles h WHERE h.id = :id"),
     @NamedQuery(name = "Hoteles.findByNombre", query = "SELECT h FROM Hoteles h WHERE h.nombre = :nombre"),
     @NamedQuery(name = "Hoteles.findByCiudad", query = "SELECT h FROM Hoteles h WHERE h.ciudad = :ciudad"),
+    @NamedQuery(name = "Hoteles.findAllCiudades", query = "SELECT DISTINCT h.ciudad FROM Hoteles h"),
     @NamedQuery(name = "Hoteles.findByNumhabitaciones", query = "SELECT h FROM Hoteles h WHERE h.numhabitaciones = :numhabitaciones"),
     @NamedQuery(name = "Hoteles.findByPreciohabitacion", query = "SELECT h FROM Hoteles h WHERE h.preciohabitacion = :preciohabitacion"),
     @NamedQuery(name = "Hoteles.findByEmailempresa", query = "SELECT h FROM Hoteles h WHERE h.emailempresa = :emailempresa")})

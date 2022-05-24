@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="Listado de hoteles"/></h1>
+                        <p:dataTable id="table" value="#{reservasClientBean.reservas}"  var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fecha}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tarjeta"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tarjeta}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Email"/>
+                                </f:facet>
+                                <h:outputText value="#{item.emailusuarios}"/>
+                            </p:column>
+
+
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+                <f:view>
+                    <h:form>
+                        <h:dataTable value="hola" var="item">
+                            <h:column>
+                                <h2><h:outputText value="Escoja una opcion"/></h2>
+                            </h:column>
+                            <h:column>
+                                <h:selectOneMenu id="questionStatus" value="#{reservasBackingBean.idReserva}" > 
+                                    <c:forEach items="#{reservasClientBean.reservas}" var="m">
+                                        <f:selectItem itemValue="#{m.id}" itemLabel="#{m.id}" />
+                                    </c:forEach>
+                                </h:selectOneMenu>
+                            </h:column> 
+                            <h:column>
+                                <p:commandButton value="Moficar" action="prueba" />
+                                <p:commandButton value="Borrar" action="/empresa/listadoHotel.xhtml" actionListener="#{reservasClientBean.deleteReserva()}"/>
+                            </h:column>
+                            <h:column>
+                                <p:commandButton value="Crear Oferta"  action="nuevoHotel.xhtml" immediate="true"/>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
