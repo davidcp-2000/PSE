@@ -8,6 +8,7 @@ package com.david.hoteling.rest;
 import com.david.hoteling.entities.Reserva;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -26,6 +27,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("com.david.hoteling.entities.reserva")
+@Named
 public class ReservaFacadeREST extends AbstractFacade<Reserva> {
 
     @PersistenceContext(unitName = "com.david_hoteling_war_1.0-SNAPSHOTPU")
