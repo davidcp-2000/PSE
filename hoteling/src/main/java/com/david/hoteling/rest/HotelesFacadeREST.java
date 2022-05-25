@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -91,25 +90,4 @@ public class HotelesFacadeREST extends AbstractFacade<Hoteles> {
         return em;
     }
     
-    
-    //----------------------------------------------------Prueba, no se utilizan
-    @GET
-    @Path("ciudadesDisponibles")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Hoteles> getCiudades() {
-        List<Hoteles> list = em.createNamedQuery("Hoteles.findAllCiudades", Hoteles.class).getResultList();
-        return list;
-    }
-    
-    
-    
-    @GET
-    @Path("hotelesCiudad/{ciudad}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Hoteles> getHotelesCiudad(@PathParam("ciudad") String ciudad) {
-        List< Hoteles> list = em.createNamedQuery("Hoteles.findByCiudad", Hoteles.class).setParameter("ciudad", ciudad).getResultList();
-        return list;
-    }
-    
-   
 }

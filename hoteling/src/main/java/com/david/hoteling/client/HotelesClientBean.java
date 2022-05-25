@@ -55,22 +55,15 @@ public class HotelesClientBean {
                 .delete();
     }
     public void modificarHotel() {
-        Hoteles h = getHotel();
-        
-        
-        
+        Hoteles h = new Hoteles();
         h.setId(bean.getIdHoteles());
         System.out.println("---------------------------------------------");
-        if(bean.getCiudadHoteles()!=null){
-            h.setCiudad(bean.getCiudadHoteles());
-        }
-        if(bean.getNombreHoteles()!=null){
-            h.setNombre(bean.getNombreHoteles());
-        }
+        System.out.println("prueba ciudad: "+bean.getCiudadHoteles());
         
-       
-        h.setNumhabitaciones(4);
-        h.setPreciohabitacion(4);
+        h.setNombre(bean.getNombreHoteles());
+        h.setCiudad(bean.getCiudadHoteles());
+        h.setNumhabitaciones(bean.getNumHabitacionesHoteles());
+        h.setPreciohabitacion(bean.getPrecioHabitacionHoteles());
         h.setEmailempresa("prueba2@gmail.com");
         target.register(HotelWriter.class)
                 .path("{id}")
