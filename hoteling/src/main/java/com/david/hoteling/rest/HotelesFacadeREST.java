@@ -97,17 +97,7 @@ public class HotelesFacadeREST extends AbstractFacade<Hoteles> {
     @Path("ciudadesDisponibles")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Hoteles> getCiudades() {
-        System.out.println("__________________________________________________");
-        System.out.println("__________________________________________________");
-        System.out.println("__________________________________________________");
-        System.out.println("__________________________________________________");
-        System.out.println("prueba1");
         List<Hoteles> list = em.createNamedQuery("Hoteles.findAllCiudades", Hoteles.class).getResultList();
-        System.out.println("__________________________________________________");
-        System.out.println("__________________________________________________");
-        System.out.println("__________________________________________________");
-        System.out.println("__________________________________________________");
-        System.out.println("prueba2" +list);
         return list;
     }
     

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import javax.json.Json;
 import javax.json.JsonValue;
 import javax.json.stream.JsonGenerator;
@@ -41,12 +43,15 @@ public class ReservaWriter  implements MessageBodyWriter<Reserva>{
     @Override
     public void writeTo(Reserva t, Class<?> type, Type type1, Annotation[] antns, MediaType mt, MultivaluedMap<String, Object> mm, OutputStream entityStream) throws IOException, WebApplicationException {
         JsonGenerator gen = Json.createGenerator(entityStream);
+        Format formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fecha=formato.format(t.getFecha());
+        System.out.println("prueba fecha"+fecha);
         gen.writeStartObject()
                 .write("id", t.getId())
                 .write("hotel", t.getHotel())
                 .write("tarjeta", t.getTarjeta())
                 .write("emailusuario", t.getEmailusuarios())
-                .write("fecha", (JsonValue) t.getFecha())
+                .write("fecha", fecha)
                 .writeEnd();
         gen.flush();
     }

@@ -61,7 +61,7 @@ public class ReservaReader implements MessageBodyReader<Reserva>{
                             r.setEmailusuarios(parser.getString());
                             break;
                         case "fecha":
-                            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+                            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                             String auxfecha =parser.getString();
                             try {
                                 r.setFecha(formato.parse(auxfecha));
