@@ -6,9 +6,6 @@
 package com.david.hoteling.reservaHotel;
 
 import com.david.hoteling.entities.Hoteles;
-import com.david.hoteling.entities.Reserva;
-import com.david.hoteling.json.HotelReader;
-import com.david.hoteling.json.HotelWriter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -20,9 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -40,7 +35,7 @@ public class ReservaHotel implements Serializable {
     EntityManager em;
     
     Client client;
-    WebTarget target,target2;
+    WebTarget target;
     
     public String getCiudad() {
         return ciudad;
@@ -79,7 +74,6 @@ public class ReservaHotel implements Serializable {
         client = ClientBuilder.newClient();
         //es posible que tenga que cambiar reservas por hoteles, porque mucha consultas son en hoteles
         target= client.target("http://localhost:8080/hoteling/webresources/com.david.hoteling.entities.hoteles");
-        target2= client.target("http://localhost:8080/hoteling/webresources/com.david.hoteling.entities.reserva");
     }
 
     @PreDestroy
@@ -102,40 +96,22 @@ public class ReservaHotel implements Serializable {
         return list;
     }*/
      public List<Hoteles> getCiudadesDisponibles(){
+        System.out.println("Prueba1_____________________________________");
         List<Hoteles> list
                     = em.createNamedQuery("Hoteles.findAllCiudades",Hoteles.class).getResultList();
+        System.out.println("_____________________________________");
+         System.out.println("_____________________________________");
+          System.out.println("_____________________________________");
+           System.out.println("_____________________________________");
+            System.out.println("prueba 4" +list);
         return list;
     }
     
-     public List<Hoteles> getHotelesCiudades(){
-         List<Hoteles> list = em.createNamedQuery("Hoteles.findByCiudad", Hoteles.class).setParameter("ciudad", ciudad).getResultList();
+     public List< Hoteles> getHotelesCiudades(){
+         System.out.println("Prueba1_____________________________________"+ciudad);
+         List< Hoteles> list = em.createNamedQuery("Hoteles.findByCiudad", Hoteles.class).setParameter("ciudad", ciudad).getResultList();
+         System.out.println("Prueba2_____________________________________"+list);
         return list;
-    }
-     
-     public Hoteles getHotel(){
-        Hoteles m = target
-                .register(HotelReader.class)
-                .path("{idHoteles}")
-                .resolveTemplate("idHoteles", idHotel)
-                .request(MediaType.APPLICATION_JSON)
-                .get(Hoteles.class);
-        return m;
-    }
-     
-     
-     public void addReserva(){
-         System.out.println("-------------------------------------");
-        System.out.println("prueba tarjeta"+tarjeta);
-        System.out.println("prueba fecha"+fecha);
-        Reserva m = new Reserva();
-        m.setId(1);
-        m.setFecha(fecha);
-        m.setHotel(idHotel);
-        m.setTarjeta(tarjeta);
-        m.setEmailusuarios("prueba@añadirReserva");
-        target2.register(HotelWriter.class)
-                .request()
-                .post(Entity.entity(m,MediaType.APPLICATION_JSON));
     }
      
      

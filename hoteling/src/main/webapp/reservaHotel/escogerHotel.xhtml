@@ -4,8 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
@@ -57,25 +56,7 @@
                         </p:dataTable>
                     </h:form>
                 </f:view>
-                <f:view>
-                    <h:form>
-                        <h:dataTable value="hola" var="item">
-                            <h:column>
-                                <h2><h:outputText value="Escoja una opcion"/></h2>
-                            </h:column>
-                            <h:column>
-                                <h:selectOneMenu id="questionStatus" value="#{reservaHotel.idHotel}" > 
-                                    <c:forEach items="#{reservaHotel.hotelesCiudades}" var="m">
-                                        <f:selectItem itemValue="#{m.id}" itemLabel="#{m.id}" />
-                                    </c:forEach>
-                                </h:selectOneMenu>
-                            </h:column> 
-                            <h:column>
-                                <p:commandButton value="Escoger Hotel" action="datosReserva.xhtml" />
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-                </f:view>
+                <p:commandButton value="escoger hotel" action="datosReserva.xhtml"/>
             </ui:define>
 
         </ui:composition>
