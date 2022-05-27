@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -13,7 +13,7 @@
             <ui:define name="content">
                 <h:form>
                     <f:event listener="#{registerView.validatePassword}" type="postValidate" />
-                    <p:panel header="Crear una nueva cuenta usuarios">
+                    <p:panel header="Crear una nueva cuenta (Empresas Hoteleras)">
                         <h:panelGrid id="grid" columns="3">
                             <h:outputLabel for="name" value="Nombre:" style="font-weight:bold"/>
                             <p:inputText id="name" value="#{registerView.nombre}" required="true"
@@ -39,8 +39,40 @@
                                         value="#{registerView.confirmPassword}" required="true"
                                         requiredMessage="Por favor, confirma tu contraseña."/>
                             <p:message for="confirmpassword"/>
+                            <h:outputLabel for="cif" value="Cif de la empresa:" style="font-weight:bold"/>
+                            <p:inputText id="cif" 
+                                         value="#{registerView.cif}" required="true"
+                                         requiredMessage="Por favor, introduce el CIF de le empresa."
+                                         validatorMessage="El cif debe contener una letra mayuscula y 8 digitos">
+                                <f:validateRegex pattern="[A-Z]{1}[0-9]{8}"/>
+                            </p:inputText>
+                            <p:message for="cif"/>
+                            <h:outputLabel for="telefono" value="Telefono de la empresa:" style="font-weight:bold"/>
+                            <p:inputText id="telefono" 
+                                         value="#{registerView.telefono}" required="true"
+                                         requiredMessage="Por favor, introduce el telefono de le empresa."
+                                         validatorMessage="el telefono debe contener 9 digitos">
+                                <f:validateRegex pattern="[0-9]{9}"/>
+                            </p:inputText>
+                            <p:message for="telefono"/>
+                            <h:outputLabel for="domicilioSocial" value="Domicilio Social de la empresa:" style="font-weight:bold"/>
+                            <p:inputText id="domicilioSocial" 
+                                         value="#{registerView.domicilioSocial}" required="true"
+                                         requiredMessage="porfavor introduzca el domicilio social de la empresa."
+                                         maxlength="30">
+                            </p:inputText>
+                            <p:message for="domicilioSocial"/>
+                            <h:outputLabel for="capitalSocial" value="Capital Social (Euros):" style="font-weight:bold"/>
+                            <p:inputNumber id="capitalSocial" 
+                                         value="#{registerView.capitalSocial}" required="true"
+                                         requiredMessage="Por favor, introduce el capital social de le empresa."
+                                         minValue="0.1"
+                                         validatorMessage="debe ser mayor que 0">
+                            </p:inputNumber>
+                                
+                            <p:message for="capitalSocial"/>
                         </h:panelGrid>
-                        <p:commandButton action="#{registerView.registerCliente()}" update="grid" value="Regístrate!" icon="uiicon-pencil"/>
+                        <p:commandButton action="#{registerView.registerEmpresa()}" update="grid" value="Regístrate!" icon="uiicon-pencil"/>
                     </p:panel>
                 </h:form>
             </ui:define>

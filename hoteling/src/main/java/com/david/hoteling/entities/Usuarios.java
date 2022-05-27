@@ -94,6 +94,16 @@ public class Usuarios implements Serializable {
         this.nombre = nombre;
         this.telefono = telefono;
     }
+    public Usuarios(String emailusuarios, String password, String nombre, String telefono,String auxCif,String auxDomicilioSocial,double capitalSocial, boolean aceptada) {
+        this.emailusuarios = emailusuarios;
+        this.password = password;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.cif=auxCif;
+        this.domiciliosocial=auxDomicilioSocial;
+        this.capitalsocial=capitalSocial;
+        this.aceptada=aceptada;
+    }
 
     public String getEmailusuarios() {
         return emailusuarios;

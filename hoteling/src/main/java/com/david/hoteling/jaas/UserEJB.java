@@ -22,7 +22,7 @@ public class UserEJB {
     @PersistenceContext
     private EntityManager em;
 
-    public Usuarios createUser(Usuarios user) {
+    public Usuarios createUser(Usuarios user,String rol) {
         try {
             user.setPassword(AuthenticationUtils.encodeSHA256(user.getPassword()));
         } catch (Exception e) {
@@ -30,16 +30,16 @@ public class UserEJB {
         }
         Grupos group = new Grupos();
         group.setEmailusuarios(user.getEmailusuarios());
-        group.setRol("users");
+        group.setRol(rol);
         em.persist(user);
         em.persist(group);
         return user;
     }
     
     public Usuarios findByEmail(String email) {
-        TypedQuery<Usuarios> query = em.createNamedQuery("Usuarios.findByEmail",
+        TypedQuery<Usuarios> query = em.createNamedQuery("Usuarios.findByEmailusuarios",
                 Usuarios.class);
-        query.setParameter("email", email);
+        query.setParameter("emailusuarios", email);
         Usuarios user = null;
         try {
             user = query.getSingleResult();
