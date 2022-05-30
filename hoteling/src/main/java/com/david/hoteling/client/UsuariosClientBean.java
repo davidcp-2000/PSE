@@ -5,6 +5,7 @@
  */
 package com.david.hoteling.client;
 
+import com.david.hoteling.entities.Grupos;
 import com.david.hoteling.entities.Usuarios;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -53,5 +54,23 @@ public class UsuariosClientBean {
     public Usuarios getUsuario(){
         Usuarios m = em.createNamedQuery("Usuarios.findByEmailusuarios", Usuarios.class).setParameter("emailusuarios", request.getUserPrincipal().getName()).getSingleResult();
         return m;
+    }
+    
+    public void deleteUsuario() {
+        target2.path("{id}")
+                .resolveTemplate("id", getIdGrupo())
+                .request()
+                .delete();
+        target.path("{id}")
+                .resolveTemplate("id",request.getUserPrincipal().getName())
+                .request()
+                .delete();
+        
+    }
+    
+    public int getIdGrupo(){
+        Grupos m = em.createNamedQuery("Grupos.findByEmailusuarios", Grupos.class).setParameter("emailusuarios", request.getUserPrincipal().getName()).getSingleResult();
+        System.out.println("prueba id grupo funcion borrar: ------------------------------------------"+m.toString());
+        return m.getId();
     }
 }
