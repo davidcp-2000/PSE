@@ -88,11 +88,13 @@ public class Usuarios implements Serializable {
         this.emailusuarios = emailusuarios;
     }
 
-    public Usuarios(String emailusuarios, String password, String nombre, String telefono) {
+    public Usuarios(String emailusuarios, String password, String nombre, String telefono,String dni,Date fecha) {
         this.emailusuarios = emailusuarios;
         this.password = password;
         this.nombre = nombre;
         this.telefono = telefono;
+        this.dni=dni;
+        this.fechanacimiento=fecha;
     }
     public Usuarios(String emailusuarios, String password, String nombre, String telefono,String auxCif,String auxDomicilioSocial,double capitalSocial, boolean aceptada) {
         this.emailusuarios = emailusuarios;

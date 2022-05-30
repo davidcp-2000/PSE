@@ -43,14 +43,15 @@ public class ReservaWriter  implements MessageBodyWriter<Reserva>{
     @Override
     public void writeTo(Reserva t, Class<?> type, Type type1, Annotation[] antns, MediaType mt, MultivaluedMap<String, Object> mm, OutputStream entityStream) throws IOException, WebApplicationException {
         JsonGenerator gen = Json.createGenerator(entityStream);
-        Format formato = new SimpleDateFormat("yyyy/MM/dd");
+        Format formato = new SimpleDateFormat("yyyy-MM-dd");
         String fecha=formato.format(t.getFecha());
-        System.out.println("prueba fecha"+fecha);
+        System.out.println("prueba fecha1"+fecha);
+        System.out.println("prueba email usuario"+t.getEmailusuarios());
         gen.writeStartObject()
                 .write("id", t.getId())
                 .write("hotel", t.getHotel())
                 .write("tarjeta", t.getTarjeta())
-                .write("emailusuario", t.getEmailusuarios())
+                .write("emailusuarios", t.getEmailusuarios())
                 .write("fecha", fecha)
                 .writeEnd();
         gen.flush();

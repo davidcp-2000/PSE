@@ -8,7 +8,6 @@ package com.david.hoteling.rest;
 import com.david.hoteling.entities.Hoteles;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -27,7 +26,6 @@ import javax.ws.rs.core.MediaType;
  */
 @Stateless
 @Path("com.david.hoteling.entities.hoteles")
-@Named
 public class HotelesFacadeREST extends AbstractFacade<Hoteles> {
 
     @PersistenceContext(unitName = "com.david_hoteling_war_1.0-SNAPSHOTPU")
@@ -90,4 +88,28 @@ public class HotelesFacadeREST extends AbstractFacade<Hoteles> {
         return em;
     }
     
+    
+    //_______________________
+    @GET
+    @Path("HotelesDeEmpresa/{emailempresa}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Hoteles> findHotelesEmpresa(@PathParam("emailempresa") String emailempresa) {
+        
+        List< Hoteles> list = em.createNamedQuery("Hoteles.findByEmailempresa", Hoteles.class)
+                .setParameter("emailempresa", emailempresa).getResultList();
+        
+        System.out.println(list);
+        return list;
+    }
+    
+    @GET
+    @Path("CiudadesDisponibles")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Hoteles> ciudadesDisponibles() {
+        System.out.println("------------------------------------------prueba inicio flujo0.1");
+        List< Hoteles> list = em.createNamedQuery("Hoteles.findAllCiudad", Hoteles.class).getResultList();
+        System.out.println("------------------------------------------prueba inicio flujo0.2");
+        System.out.println(list);
+        return list;
+    }
 }

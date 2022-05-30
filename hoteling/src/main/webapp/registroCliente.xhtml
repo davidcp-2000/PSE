@@ -39,6 +39,27 @@
                                         value="#{registerView.confirmPassword}" required="true"
                                         requiredMessage="Por favor, confirma tu contraseña."/>
                             <p:message for="confirmpassword"/>
+                            <h:outputLabel for="dni" value="DNI:" style="font-weight:bold"/>
+                            <p:inputText id="dni" required="true"
+                                        value="#{registerView.dni}" 
+                                        requiredMessage="Por favor, introduce tu DNI, recuerde 8 digitos y una letra mayuscula.">
+                                <f:validateRegex pattern="[0-9]{8}[A-Z]{1}"/>
+                            </p:inputText>
+                            <p:message for="dni"/>
+                            <h:outputLabel for="telefono" value="Telefono de la empresa:" style="font-weight:bold"/>
+                            <p:inputText id="telefono" 
+                                         value="#{registerView.telefono}" required="true"
+                                         requiredMessage="Por favor, introduce el telefono de le empresa."
+                                         validatorMessage="el telefono debe contener 9 digitos">
+                                <f:validateRegex pattern="[0-9]{9}"/>
+                            </p:inputText>
+                            <p:message for="telefono"/>
+                            <p:outputLabel for="fecha" value="Fecha de nacimiento"/>
+                            <p:datePicker id="fecha" value="#{registerView.fechaNacimiento}" pattern="yyyy-MM-dd" locale="es"
+                                          yearNavigator="true"  mindate="1950"maxdate="#{registerView.fechaMaximo()}" 
+                                          requiredMessage="Por favor, introduce tu fecha de nacimiento. Recuerda que debes de ser mayor de edad."/>
+                            <p:message for="fecha"/>
+                            
                         </h:panelGrid>
                         <p:commandButton action="#{registerView.registerCliente()}" update="grid" value="Regístrate!" icon="uiicon-pencil"/>
                     </p:panel>

@@ -48,6 +48,7 @@ public class HotelWriter implements MessageBodyWriter<Hoteles> {
                 .write("numhabitaciones", t.getNumhabitaciones())
                 .write("preciohabitacion", t.getPreciohabitacion())
                 .write("emailempresa", t.getEmailempresa())
+                .write("servicios", t.getServicios())
                 .writeEnd();
         gen.flush();
     }

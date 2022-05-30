@@ -13,24 +13,21 @@
                 <h1>Modificar hoteles</h1>
                <h:form>
                     <table cellpadding="5" cellspacing="5">
+                        
                         <tr>
                             <th align="left">Nombre:</th>
-                            <td><h:outputText value="#{hotelesClientBean.hotel.nombre}"/></td>
                             <td><h:inputText value="#{hotelesBackingBean.nombreHoteles}"/> </td>
                         </tr>
                         <tr>
                             <th align="left">Ciudad:</th>
-                            <td><h:outputText value="#{hotelesClientBean.hotel.ciudad}"/></td>
                             <td><h:inputText value="#{hotelesBackingBean.ciudadHoteles}"/></td>
                         </tr>
                         <tr>
                             <th align="left">Numero de habitaciones:</th>
-                            <td><h:outputText value="#{hotelesClientBean.hotel.numhabitaciones}"/></td>
                             <td><h:inputText value="#{hotelesBackingBean.numHabitacionesHoteles}"/> </td>
                         </tr>
                         <tr>
                             <th align="left">Precio por habitacion:</th>
-                            <td><h:outputText value="#{hotelesClientBean.hotel.preciohabitacion}"/></td>
                             <td><h:inputText value="#{hotelesBackingBean.precioHabitacionHoteles}"/></td>
                         </tr>
                     </table>

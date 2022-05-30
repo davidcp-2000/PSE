@@ -35,6 +35,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.david.hoteling.json.HotelWriter.class);
         resources.add(com.david.hoteling.json.ReservaReader.class);
         resources.add(com.david.hoteling.json.ReservaWriter.class);
+        resources.add(com.david.hoteling.json.TarjetaReader.class);
         resources.add(com.david.hoteling.rest.GruposFacadeREST.class);
         resources.add(com.david.hoteling.rest.HotelesFacadeREST.class);
         resources.add(com.david.hoteling.rest.ReservaFacadeREST.class);

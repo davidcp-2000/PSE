@@ -7,6 +7,9 @@ package com.david.hoteling.jaas;
 
 import com.david.hoteling.entities.Usuarios;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -30,7 +33,7 @@ public class RegisterView implements Serializable {
     private String email;
     private String password;
     private String confirmPassword;
-    private String telefono="983882158";
+    private String telefono;
     //columnas solo para clientes
     private String dni;
     private Date fechaNacimiento;
@@ -38,7 +41,7 @@ public class RegisterView implements Serializable {
     private double capitalSocial;
     private String domicilioSocial;
     private String cif;
-    private boolean aceptada;
+    private boolean aceptada=false;
 
     
     @Inject
@@ -159,12 +162,21 @@ public class RegisterView implements Serializable {
             facesContext.addMessage(uiInputPassword.getClientId(), msg);
             facesContext.renderResponse();
         }
+        
+        //devuelve la fecha maxima para verificar que el usuario es mayor de edad
+        
     }
-    
+    public LocalDateTime fechaMaximo() {
+        LocalDateTime hoy=LocalDateTime.now();
+        System.out.println(hoy.minusYears(18));
+        return hoy.minusYears(18);
+    }
     public String registerCliente() {
-        Usuarios user = new Usuarios(email, password,nombre,telefono);
+        System.out.println("Nuevo usuario creado con e-mail: " + email + " y nombre:" + nombre + " contraseña:" + password + " telefono:" + telefono + " dni:" + dni + " fecha Nacimiento:" + fechaNacimiento);
+
+        Usuarios user = new Usuarios(email, password,nombre,telefono,dni,fechaNacimiento);
         userEJB.createUser(user,"cliente");
-        System.out.println("Nuevo usuario creado con e-mail: " + email + " y nombre:" + nombre+ " contraseña:"+ password +" telefono:"+telefono);
+        System.out.println("Nuevo usuario creado con e-mail: " + email + " y nombre:" + nombre+ " contraseña:"+ password +" telefono:"+telefono +" dni:"+dni+" fecha Nacimiento:"+fechaNacimiento);
     return "regok";
     }
     

@@ -5,6 +5,7 @@
  */
 package com.david.hoteling.json;
 
+
 import com.david.hoteling.entities.Hoteles;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,25 +23,24 @@ import javax.ws.rs.ext.Provider;
 /**
  *
  * @author parra
- */
+ */ 
 @Provider
 @Consumes(MediaType.APPLICATION_JSON)
-public class HotelReader implements MessageBodyReader<Hoteles>{
+public class TarjetaReader implements MessageBodyReader<Tarjeta>{
 
     @Override
     public boolean isReadable(Class<?> type, Type type1, Annotation[] antns, MediaType mt) {
-        return Hoteles.class.isAssignableFrom(type);
+        return Tarjeta.class.isAssignableFrom(type);
     }
 
     @Override
-    public Hoteles readFrom(Class<Hoteles> type,
-            Type genericType,
+    public Tarjeta readFrom(Class<Tarjeta> type,Type genericType,
             Annotation[] annotations,
             MediaType mediaType,
             MultivaluedMap<String, String> httpHeaders,
             InputStream entityStream)
             throws IOException, WebApplicationException {
-        Hoteles hotel = new Hoteles();
+        Tarjeta t=new Tarjeta();
         JsonParser parser = Json.createParser(entityStream);
         while (parser.hasNext()) {
             switch (parser.next()) {
@@ -48,27 +48,19 @@ public class HotelReader implements MessageBodyReader<Hoteles>{
                     String key = parser.getString();
                     parser.next();
                     switch (key) {
-                        case "id":
-                            hotel.setId(parser.getInt());
+                        case "tarjeta":
+                            System.out.println("prueba valdavia json tarjeta");
+                            t.setTarjeta(parser.getString());
                             break;
-                        case "nombre":
-                            hotel.setNombre(parser.getString());
+                        case "autorizada":
+                            
+                            
+                            System.out.println("prueba valdavia json autorizada");
+                            String aux=parser.getString();
+                            System.out.println("prueba valdavia"+ aux);
+                            t.setConfirmacion(parser.getString());
                             break;
-                        case "ciudad":
-                            hotel.setCiudad(parser.getString());
-                            break;
-                        case "numhabitaciones":
-                            hotel.setNumhabitaciones(parser.getInt());
-                            break;
-                        case "preciohabitacion":
-                            hotel.setPreciohabitacion(Double.parseDouble(parser.getString()));
-                            break;
-                        case "emailempresa":
-                            hotel.setEmailempresa(parser.getString());
-                            break;
-                        case "servicios":
-                            hotel.setServicios(parser.getString());
-                            break;
+                        
                         default:
                             break;
                     }
@@ -77,7 +69,7 @@ public class HotelReader implements MessageBodyReader<Hoteles>{
                     break;
             }
         }
-        return hotel;
+        return t;
     }
     
 }

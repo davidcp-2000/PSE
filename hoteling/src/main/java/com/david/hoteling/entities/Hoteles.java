@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author parra
  */
+
 @Entity
 @Table(name = "hoteles")
 @XmlRootElement
@@ -31,10 +32,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Hoteles.findById", query = "SELECT h FROM Hoteles h WHERE h.id = :id"),
     @NamedQuery(name = "Hoteles.findByNombre", query = "SELECT h FROM Hoteles h WHERE h.nombre = :nombre"),
     @NamedQuery(name = "Hoteles.findByCiudad", query = "SELECT h FROM Hoteles h WHERE h.ciudad = :ciudad"),
-    @NamedQuery(name = "Hoteles.findAllCiudades", query = "SELECT DISTINCT h.ciudad FROM Hoteles h"),
+    @NamedQuery(name = "Hoteles.findAllCiudad", query = "SELECT DISTINCT h.ciudad FROM Hoteles h"),
     @NamedQuery(name = "Hoteles.findByNumhabitaciones", query = "SELECT h FROM Hoteles h WHERE h.numhabitaciones = :numhabitaciones"),
     @NamedQuery(name = "Hoteles.findByPreciohabitacion", query = "SELECT h FROM Hoteles h WHERE h.preciohabitacion = :preciohabitacion"),
-    @NamedQuery(name = "Hoteles.findByEmailempresa", query = "SELECT h FROM Hoteles h WHERE h.emailempresa = :emailempresa")})
+    @NamedQuery(name = "Hoteles.findByEmailempresa", query = "SELECT h FROM Hoteles h WHERE h.emailempresa = :emailempresa"),
+    @NamedQuery(name = "Hoteles.findByServicios", query = "SELECT h FROM Hoteles h WHERE h.servicios = :servicios")})
 public class Hoteles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,6 +68,11 @@ public class Hoteles implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "emailempresa")
     private String emailempresa;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "servicios")
+    private String servicios;
 
     public Hoteles() {
     }
@@ -74,13 +81,14 @@ public class Hoteles implements Serializable {
         this.id = id;
     }
 
-    public Hoteles(Integer id, String nombre, String ciudad, int numhabitaciones, double preciohabitacion, String emailempresa) {
+    public Hoteles(Integer id, String nombre, String ciudad, int numhabitaciones, double preciohabitacion, String emailempresa, String servicios) {
         this.id = id;
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.numhabitaciones = numhabitaciones;
         this.preciohabitacion = preciohabitacion;
         this.emailempresa = emailempresa;
+        this.servicios = servicios;
     }
 
     public Integer getId() {
@@ -129,6 +137,14 @@ public class Hoteles implements Serializable {
 
     public void setEmailempresa(String emailempresa) {
         this.emailempresa = emailempresa;
+    }
+
+    public String getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(String servicios) {
+        this.servicios = servicios;
     }
 
     @Override

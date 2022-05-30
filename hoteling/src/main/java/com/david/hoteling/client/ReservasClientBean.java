@@ -7,14 +7,18 @@ package com.david.hoteling.client;
 
 
 import com.david.hoteling.entities.Reserva;
+import com.david.hoteling.json.ReservaReader;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -28,6 +32,9 @@ public class ReservasClientBean {
     @Inject
     ReservasBackingBean bean;
 
+    FacesContext context = FacesContext.getCurrentInstance();
+    HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+    
     @PostConstruct
     public void init() {
         client = ClientBuilder.newClient();
@@ -40,7 +47,10 @@ public class ReservasClientBean {
     }
 
     public Reserva[] getReservas() {
+        System.out.println("____________________________________PRUEBA");
         return target
+                .path("ReservaCliente/{emailusuarios}")
+                .resolveTemplate("emailusuarios",request.getUserPrincipal().getName())
                 .request()
                 .get(Reserva[].class);
     }
@@ -50,5 +60,15 @@ public class ReservasClientBean {
                 .resolveTemplate("idReserva", bean.getIdReserva())
                 .request()
                 .delete();
+    }
+    
+    public Reserva getReserva() {
+        Reserva m = target
+                .register(ReservaReader.class)
+                .path("{idHoteles}")
+                .resolveTemplate("idHoteles", bean.getIdReserva())
+                .request(MediaType.APPLICATION_JSON)
+                .get(Reserva.class);
+        return m;
     }
 }

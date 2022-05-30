@@ -18,16 +18,32 @@
                         </tr>
                         <tr>
                             <th align="left">Ciudad:</th>
-                            <td><h:outputText value="#{reservaHotel.idHotel}"/></td>
+                            <td><h:outputText value="#{reservaHotel.ciudad}"/></td>
                         </tr>    
                         <tr>
                             <th align="left">Tarjeta:</th>
                             <td><h:outputText value="#{reservaHotel.tarjeta}"/></td>
                         </tr>
+                        <tr>
+                            <th align="left">idHotel:</th>
+                            <td><h:outputText value="#{reservaHotel.hotel.id}"/></td>
+                        </tr>
+                        <tr>
+                            <th align="left">nombre:</th>
+                            <td><h:outputText value="#{reservaHotel.hotel.nombre}"/></td>
+                        </tr>
+                        <tr>
+                            <th align="left">precioHabitacion:</th>
+                            <td><h:outputText value="#{reservaHotel.hotel.preciohabitacion}"/></td>
+                        </tr>
+                        <tr>
+                            <th align="left">servicios:</th>
+                            <td><h:outputText value="#{reservaHotel.hotel.servicios}"/></td>
+                        </tr>
                     </table>
 
                 </h:form>
-                <p:commandButton value="volver inicio" action="/index.xhtml"/>
+                <p:commandButton value="volver inicio" action="/cliente/listadoReservas.xhtml"/>
             </ui:define>
 
         </ui:composition>

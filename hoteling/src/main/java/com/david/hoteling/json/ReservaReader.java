@@ -58,7 +58,11 @@ public class ReservaReader implements MessageBodyReader<Reserva>{
                             r.setTarjeta(parser.getString());
                             break;
                         case "emailusuarios":
-                            r.setEmailusuarios(parser.getString());
+                            System.out.println("prueba 3");
+                            String aux =parser.getString();
+                            System.out.println("prueba 3"+aux);
+                            r.setEmailusuarios(aux);
+                            System.out.println("prueba 3"+r.getEmailusuarios());
                             break;
                         case "fecha":
                             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");

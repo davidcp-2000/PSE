@@ -7,17 +7,24 @@ package com.david.hoteling.reservaHotel;
 
 import com.david.hoteling.entities.Hoteles;
 import com.david.hoteling.entities.Reserva;
+import com.david.hoteling.jaas.LoginView;
 import com.david.hoteling.json.HotelReader;
 import com.david.hoteling.json.HotelWriter;
+import com.david.hoteling.json.ReservaWriter;
+import com.david.hoteling.json.Tarjeta;
+import com.david.hoteling.json.TarjetaReader;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.faces.context.FacesContext;
+
 import javax.faces.flow.FlowScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -40,7 +47,7 @@ public class ReservaHotel implements Serializable {
     EntityManager em;
     
     Client client;
-    WebTarget target,target2;
+    WebTarget target,target2,target3;
     
     public String getCiudad() {
         return ciudad;
@@ -80,6 +87,7 @@ public class ReservaHotel implements Serializable {
         //es posible que tenga que cambiar reservas por hoteles, porque mucha consultas son en hoteles
         target= client.target("http://localhost:8080/hoteling/webresources/com.david.hoteling.entities.hoteles");
         target2= client.target("http://localhost:8080/hoteling/webresources/com.david.hoteling.entities.reserva");
+        target3=client.target("http://valdavia.infor.uva.es:8080/hoteling/webresources/tarjetas");
     }
 
     @PreDestroy
@@ -102,8 +110,11 @@ public class ReservaHotel implements Serializable {
         return list;
     }*/
      public List<Hoteles> getCiudadesDisponibles(){
-        List<Hoteles> list
-                    = em.createNamedQuery("Hoteles.findAllCiudades",Hoteles.class).getResultList();
+         System.out.println("------------------------------------------prueba inicio flujo");
+         List<Hoteles> list = em.createNamedQuery("Hoteles.findAllCiudad", Hoteles.class).getResultList();
+        
+         System.out.println("------------------------------------------prueba inicio flujo1");
+         
         return list;
     }
     
@@ -123,20 +134,59 @@ public class ReservaHotel implements Serializable {
     }
      
      
-     public void addReserva(){
-         System.out.println("-------------------------------------");
-        System.out.println("prueba tarjeta"+tarjeta);
-        System.out.println("prueba fecha"+fecha);
-        Reserva m = new Reserva();
-        m.setId(1);
-        m.setFecha(fecha);
-        m.setHotel(idHotel);
-        m.setTarjeta(tarjeta);
-        m.setEmailusuarios("prueba@añadirReserva");
-        target2.register(HotelWriter.class)
+     public String addReserva(){
+         try {
+         System.out.println("-------------------------------------try  "+autorizarReserva());
+         }catch(NullPointerException e){
+             System.out.println("---------------------------------- add reserva catch");
+         }
+         
+         FacesContext context = FacesContext.getCurrentInstance();
+         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+         if(autorizarReserva().equals("si")){
+            Reserva m = new Reserva();
+            m.setId(1);
+            m.setFecha(fecha);
+            m.setHotel(idHotel);
+            m.setEmailusuarios(request.getUserPrincipal().getName());
+            m.setTarjeta(tarjeta);
+            target2.register(ReservaWriter.class)
                 .request()
                 .post(Entity.entity(m,MediaType.APPLICATION_JSON));
+            return "confirmarReserva.xhtml";
+         }else{
+            return "datosReserva.xhtml";
+         }
+        
     }
+     
+     public String autorizarReserva(){
+         System.out.println("______________________________________________________________prueba valdivia");
+         System.out.println("prueba tarjeta valdavia"+tarjeta);
+         Tarjeta m = target3
+                 .path("{tarjeta}")
+                 .resolveTemplate("tarjeta",tarjeta )
+                 .register(TarjetaReader.class)
+                 .request(MediaType.APPLICATION_JSON)
+                 .get(Tarjeta.class);
+         try{
+             System.out.println("prueba valdavid valor m si no hay tarjeta"+m.toString());
+             System.out.println("------------------------------------------------ prueba try :"+m.getConfirmacion()); 
+             if(m.getConfirmacion().equals("si")){
+                 return "si";
+             }else{
+                 return "han rechazado el pago";
+             }
+                
+         }catch(NullPointerException e){
+             System.out.println("------------------------------------------------ prueba catch"); 
+             return "tarjeta no encontrada porfavor introduzca otra tarjeta";  
+         }
+     }
+     
      
      
 }
+
+
+

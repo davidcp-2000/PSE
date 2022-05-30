@@ -20,8 +20,17 @@ public class HotelesBackingBean implements Serializable {
     String nombreHoteles;
     String ciudadHoteles;
     int numHabitacionesHoteles;
-    float precioHabitacionHoteles;
+    Double precioHabitacionHoteles;
     String emailEmpresaHoteles;
+    String servicios;
+
+    public String getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(String servicios) {
+        this.servicios = servicios;
+    }
 
     public String getNombreHoteles() {
         return nombreHoteles;
@@ -47,13 +56,15 @@ public class HotelesBackingBean implements Serializable {
         this.numHabitacionesHoteles = numHabitacionesHoteles;
     }
 
-    public float getPrecioHabitacionHoteles() {
+    public Double getPrecioHabitacionHoteles() {
         return precioHabitacionHoteles;
     }
 
-    public void setPrecioHabitacionHoteles(float precioHabitacionHoteles) {
+    public void setPrecioHabitacionHoteles(Double precioHabitacionHoteles) {
         this.precioHabitacionHoteles = precioHabitacionHoteles;
     }
+
+    
 
     public String getEmailEmpresaHoteles() {
         return emailEmpresaHoteles;

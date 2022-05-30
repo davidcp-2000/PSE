@@ -19,32 +19,39 @@
             
         
         
-            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                <h2><h:outputText value= "Aplicación Empresarial Cines Luz de Castilla - Segovia"/></h2>
+            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true" >
+                <h2><h:outputText value="Hoteling  Empresa8@gmail.com  Client1@gmail.com"/></h2>
+                <h:form>
+                      
+                    <p:toolbar rendered="#{request.isUserInRole('cliente')}">
+                        <f:facet name="right">
+                            <p:menuButton value="#{loginView.authenticatedUser.emailusuarios}">
+                                <p:menuitem value="Cerrar sesión" action="#{loginView.logout}" icon="ui-icon-power" />
+                                <p:menuitem value="Información cuenta" action="/manejoDeUsuarios/informacionCuentaClient.xhtml" icon="ui-icon-power" />
+                            </p:menuButton>
+                        </f:facet>
+                    </p:toolbar>
+                    <p:toolbar rendered="#{request.isUserInRole('empresa')}">
+                        <f:facet name="right">
+                            <p:menuButton value="#{loginView.authenticatedUser.emailusuarios}">
+                                <p:menuitem value="Cerrar sesión" action="#{loginView.logout}" icon="ui-icon-power" />
+                                
+                            </p:menuButton>
+                        </f:facet>
+                    </p:toolbar>
+                </h:form>
             </p:layoutUnit>
             <div>
-                <p:toolbar rendered="#{request.isUserInRole('cliente')}"></p:toolbar><p:toolbar rendered="#{request.isUserInRole('users')}">
-                    <f:facet name="left">
-                        <p:menuitem value="Clientes" outcome="/cliente/listadoReservas.xhtml" icon="ui-icon-home" />
-                        <p:menuitem value="Booking" action="booking"/>
-                        <span class="ui-separator">
-                            <span class="ui-icon ui-icon-grip-dotted-vertical" />
-                        </span>
-                        <p:commandButton type="button" title="Save" icon="ui-icon-disk" />
-                    </f:facet>
-                    <f:facet name="right">
-                        <p:menuButton value="#{loginView.authenticatedUser.emailusuarios}">
-                            <p:menuitem value="Cerrar sesión" action="#{loginView.logout}" icon="ui-icon-power" />
-                        </p:menuButton>
-                    </f:facet>
-                </p:toolbar>
                 <p:layoutUnit position="west" size="200" header="Menú" collapsible="true">
                     <h:form>
                         <p:menu>
                             <p:menuitem value="Inicio" outcome="/index.xhtml" icon="ui-icon-home" />
+                            
                             <p:menuitem value="Iniciar Sesión" outcome="/login.xhtml"
                                         rendered="#{request.isUserInRole('cliente')==false}" icon="ui-icon-key"/>
-                            <p:menuitem value="Registro" outcome="/registroEmpresa.xhtml"
+                            <p:menuitem value="Registro Empresas Hoteleras" outcome="/registroEmpresa.xhtml"
+                                        rendered="#{request.isUserInRole('cliente')==false}" icon="ui-icon-pencil"/>
+                            <p:menuitem value="Registro usuarios" outcome="/registroCliente.xhtml"
                                         rendered="#{request.isUserInRole('cliente')==false}" icon="ui-icon-pencil"/>
                             <p:submenu label ="Usuario" rendered="#{request.isUserInRole('cliente')}">
                                 <p:menuitem value="reservaHotel" action="reservaHotel" icon="ui-icon-cart"/>
@@ -53,6 +60,7 @@
                                 <p:menuitem value="Hoteles1" outcome="/empresa/listadoHoteles.xhtml" icon="ui-icon-calculator"/>
                             </p:submenu>
                             <p:menuitem value="Empresa" outcome="/empresa/listadoHoteles.xhtml" icon="ui-icon-home" />
+                            <p:menuitem value="Chat" outcome="/chat/chatroom.xhtml" />
                             
                         </p:menu>
                     </h:form>

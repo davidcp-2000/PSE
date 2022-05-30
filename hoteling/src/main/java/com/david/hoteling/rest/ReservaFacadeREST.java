@@ -87,6 +87,16 @@ public class ReservaFacadeREST extends AbstractFacade<Reserva> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    ////////
     
-    
+    @GET
+    @Path("ReservaCliente/{emailusuarios}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public List<Reserva> findHotelesEmpresa(@PathParam("emailusuarios") String emailcliente) {
+        List< Reserva> list = em.createNamedQuery("Reserva.findByEmailusuarios", Reserva.class)
+                .setParameter("emailusuarios", emailcliente).getResultList();
+        
+        System.out.println(list);
+        return list;
+    }
 }
