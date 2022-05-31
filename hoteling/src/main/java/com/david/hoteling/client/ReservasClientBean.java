@@ -6,19 +6,12 @@
 package com.david.hoteling.client;
 
 
-import com.david.hoteling.entities.Hoteles;
 import com.david.hoteling.entities.Reserva;
-import com.david.hoteling.json.HotelReader;
 import com.david.hoteling.json.ReservaReader;
-import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class ReservasClientBean {
     Client client;
-    WebTarget target,target2;
+    WebTarget target;
     @Inject
     ReservasBackingBean bean;
 
@@ -46,7 +39,6 @@ public class ReservasClientBean {
     public void init() {
         client = ClientBuilder.newClient();
         target = client.target("http://localhost:8080/hoteling/webresources/com.david.hoteling.entities.reserva");
-        target2= client.target("http://localhost:8080/hoteling/webresources/com.david.hoteling.entities.hoteles");
     }
 
     @PreDestroy
@@ -55,6 +47,7 @@ public class ReservasClientBean {
     }
 
     public Reserva[] getReservas() {
+        System.out.println("____________________________________PRUEBA");
         return target
                 .path("ReservaCliente/{emailusuarios}")
                 .resolveTemplate("emailusuarios",request.getUserPrincipal().getName())
@@ -78,25 +71,4 @@ public class ReservasClientBean {
                 .get(Reserva.class);
         return m;
     }
-    
-    
-    public Hoteles getHotel(int id) {
-        System.out.println("prueba flujo get Hotel________________________________________________________________________");
-            Hoteles m=target2
-                .register(HotelReader.class)
-                .path("{idHoteles}")
-                .resolveTemplate("idHoteles", id)
-                .request(MediaType.APPLICATION_JSON)
-                .get(Hoteles.class);
-            System.out.println("prueba flujo get Hotel_______________");
-        return m;
-    }
-    public Hoteles auxGetHotel(int id) {
-        System.out.println("prueba flujo get Hotel________________________________________________________________________");
-            Hoteles m=getHotel(id);
-            bean.setH(m);
-        return m;
-    }
-    
-     
 }

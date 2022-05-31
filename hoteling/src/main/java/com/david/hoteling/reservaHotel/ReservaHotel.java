@@ -18,11 +18,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 
 import javax.faces.flow.FlowScoped;
 import javax.inject.Named;
@@ -157,9 +153,9 @@ public class ReservaHotel implements Serializable {
             target2.register(ReservaWriter.class)
                 .request()
                 .post(Entity.entity(m,MediaType.APPLICATION_JSON));
-            return "confirmarReserva";
+            return "confirmarReserva.xhtml";
          }else{
-            return "datosReserva";
+            return "datosReserva.xhtml";
          }
         
     }
@@ -167,7 +163,6 @@ public class ReservaHotel implements Serializable {
      public String autorizarReserva(){
          System.out.println("______________________________________________________________prueba valdivia");
          System.out.println("prueba tarjeta valdavia"+tarjeta);
-         if(tarjeta!=null){
          Tarjeta m = target3
                  .path("{tarjeta}")
                  .resolveTemplate("tarjeta",tarjeta )
@@ -187,34 +182,9 @@ public class ReservaHotel implements Serializable {
              System.out.println("------------------------------------------------ prueba catch"); 
              return "tarjeta no encontrada porfavor introduzca otra tarjeta";  
          }
-     }else{
-             return "Es obligatorio introducir la tarjeta";
-         }
      }
-     public void confirmarTarjeta(ComponentSystemEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        String resultado= autorizarReserva();
-         UIComponent components = event.getComponent();
-        UIInput uiInputPassword = (UIInput) components.findComponent("tarjeta");
-         System.out.println("---------------------------------------------------------prueva ventana emergente:"+resultado);
-        if(resultado.equals("si")==true){
-            return;
-        }
-        if (resultado.equals("no")) {
-            FacesMessage msg = new FacesMessage("Tarjeta no autorizada, introduzca ");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            facesContext.addMessage(uiInputPassword.getClientId(), msg);
-            facesContext.renderResponse();
-        }
-        if (resultado.equals("Es obligatorio introducir la tarjeta")) {
-            FacesMessage msg = new FacesMessage("Tarjeta no encontrada utilize otra");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            facesContext.addMessage(uiInputPassword.getClientId(), msg);
-            facesContext.renderResponse();
-        }
-
-        //devuelve la fecha maxima para verificar que el usuario es mayor de edad
-    }
+     
+     
      
 }
 

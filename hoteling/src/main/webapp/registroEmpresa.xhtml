@@ -9,86 +9,72 @@
     <body>
 
         <ui:composition template="./WEB-INF/template.xhtml">
+
             <ui:define name="content">
-                <div class="ui-g ui-fluid">
-                    <div class="ui-g-12 ui-md-3"></div>
-                    <div class="ui-g-12 ui-md-6">
-                        <h:form>
-                            <f:event listener="#{registerView.validatePassword}" type="postValidate" />
-                             <p:messages id="messages" closable="true"/>
-                            <p:panel header="Crear una nueva cuenta para empresas" style="text-align:center ">
-                                <h:panelGrid id="grid" columns="2" cellspacing="10" style="width:100%;margin:0px auto; font-weight:bold">
-                                    <h:outputLabel for="name" value="Nombre:" />
-                                    <p:inputText id="name" value="#{registerView.nombre}" required="true"
-                                                 requiredMessage="Por favor, introduce tu nombre." maxlength="50"/>
-                                    
-                                    <h:outputLabel for="email" value="E-Mail:" />
-                                    <p:inputText id="email" value="#{registerView.email}" required="true"
-                                                 requiredMessage="Por favor, introduce tu email." maxlength="200">
-                                        <f:validator validatorId="emailValidator" />
-                                    </p:inputText>
-                                   
-                                    <h:outputLabel for="password" value="Contraseña:" />
-                                    <p:password id="password" value="#{registerView.password}" feedback="true"
-                                                required="true" requiredMessage="Por favor, introduce tu contraseña."
-                                                validatorMessage="La contraseña debe contener al menos un carácter en minúsculas,
-                                                un caracter en mayúscula, un número y su longitud debe estar entre 6 y 20
-                                                caracteres." maxlength="50">
-                                        <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,50})" />
-                                    </p:password>
-                                    
-                                    <h:outputLabel for="confirmpassword" value="Confirmar contraseña:" />
-                                    <p:password id="confirmpassword" feedback="true"
-                                                value="#{registerView.confirmPassword}" required="true"
-                                                requiredMessage="Por favor, confirma tu contraseña." maxlength="50"/>
-                                  
-                                    <h:outputLabel for="cif" value="Cif de la empresa:" />
-                                    <p:inputText id="cif" 
-                                                 value="#{registerView.cif}" required="true"
-                                                 requiredMessage="Por favor, introduce el CIF de le empresa."
-                                                 validatorMessage="El cif debe contener una letra mayuscula y 8 digitos" maxlength="9">
-                                        <f:validateRegex pattern="[A-Z]{1}[0-9]{8}"/>
-                                    </p:inputText>
-                                   
-                                    <h:outputLabel for="telefono" value="Telefono de la empresa:" />
-                                    <p:inputText id="telefono" 
-                                                 value="#{registerView.telefono}" required="true"
-                                                 requiredMessage="Por favor, introduce el telefono de le empresa."
-                                                 validatorMessage="el telefono debe contener 9 digitos" maxlength="9">
-                                        <f:validateRegex pattern="[0-9]{9}"/>
-                                    </p:inputText>
-                                    
-                                    <h:outputLabel for="domicilioSocial" value="Domicilio Social de la empresa:" />
-                                    <p:inputText id="domicilioSocial" 
-                                                 value="#{registerView.domicilioSocial}" required="true"
-                                                 requiredMessage="porfavor introduzca el domicilio social de la empresa."
-                                                 maxlength="200">
-                                    </p:inputText>
-                                    
-                                    <h:outputLabel for="capitalSocial" value="Capital Social (Euros):"/>
-                                    <p:inputNumber id="capitalSocial" 
-                                                   value="#{registerView.capitalSocial}" required="true"
-                                                   requiredMessage="Por favor, introduce el capital social de le empresa."
-                                                   minValue="0.1"
-                                                   validatorMessage="debe ser mayor que 0">
-                                    </p:inputNumber>
-
-                                    
-                                </h:panelGrid>
-                                <p:commandButton action="#{registerView.registerCliente()}" update="messages" value="Regístrate!" icon="uiicon-pencil"/>
-                            </p:panel>
-                        </h:form>
-                        <p:panel >
-                            <h:panelGrid id="grid2" columns="2" cellspacing="10" style="width:100%;margin:0px auto;">
-                                <p:commandButton action="registroCliente" value="Registro cliente"/>
-                                <p:commandButton action="index" value="Iniciar Sesión"/>
-                            </h:panelGrid>
-                        </p:panel>
-
-                    </div>
-                    <div class="ui-g-12 ui-md-3"></div>
-                </div>
-
+                <h:form>
+                    <f:event listener="#{registerView.validatePassword}" type="postValidate" />
+                    <p:panel header="Crear una nueva cuenta (Empresas Hoteleras)">
+                        <h:panelGrid id="grid" columns="3">
+                            <h:outputLabel for="name" value="Nombre:" style="font-weight:bold"/>
+                            <p:inputText id="name" value="#{registerView.nombre}" required="true"
+                                         requiredMessage="Por favor, introduce tu nombre." maxlength="30"/>
+                            <p:message for="name"/>
+                            <h:outputLabel for="email" value="E-Mail:" style="font-weight:bold"/>
+                            <p:inputText id="email" value="#{registerView.email}" required="true"
+                                         requiredMessage="Por favor, introduce tu email.">
+                                <f:validator validatorId="emailValidator" />
+                            </p:inputText>
+                            <p:message for="email"/>
+                            <h:outputLabel for="password" value="Contraseña:" style="font-weight:bold"/>
+                            <p:password id="password" value="#{registerView.password}" feedback="true"
+                                        required="true" requiredMessage="Por favor, introduce tu contraseña."
+                                        validatorMessage="La contraseña debe contener al menos un carácter en minúsculas,
+                                        un caracter en mayúscula, un número y su longitud debe estar entre 6 y 20
+                                        caracteres.">
+                                <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+                            </p:password>
+                            <p:message for="password"/>
+                            <h:outputLabel for="confirmpassword" value="Confirmar contraseña:" style="font-weight:bold"/>
+                            <p:password id="confirmpassword" feedback="true"
+                                        value="#{registerView.confirmPassword}" required="true"
+                                        requiredMessage="Por favor, confirma tu contraseña."/>
+                            <p:message for="confirmpassword"/>
+                            <h:outputLabel for="cif" value="Cif de la empresa:" style="font-weight:bold"/>
+                            <p:inputText id="cif" 
+                                         value="#{registerView.cif}" required="true"
+                                         requiredMessage="Por favor, introduce el CIF de le empresa."
+                                         validatorMessage="El cif debe contener una letra mayuscula y 8 digitos">
+                                <f:validateRegex pattern="[A-Z]{1}[0-9]{8}"/>
+                            </p:inputText>
+                            <p:message for="cif"/>
+                            <h:outputLabel for="telefono" value="Telefono de la empresa:" style="font-weight:bold"/>
+                            <p:inputText id="telefono" 
+                                         value="#{registerView.telefono}" required="true"
+                                         requiredMessage="Por favor, introduce el telefono de le empresa."
+                                         validatorMessage="el telefono debe contener 9 digitos">
+                                <f:validateRegex pattern="[0-9]{9}"/>
+                            </p:inputText>
+                            <p:message for="telefono"/>
+                            <h:outputLabel for="domicilioSocial" value="Domicilio Social de la empresa:" style="font-weight:bold"/>
+                            <p:inputText id="domicilioSocial" 
+                                         value="#{registerView.domicilioSocial}" required="true"
+                                         requiredMessage="porfavor introduzca el domicilio social de la empresa."
+                                         maxlength="30">
+                            </p:inputText>
+                            <p:message for="domicilioSocial"/>
+                            <h:outputLabel for="capitalSocial" value="Capital Social (Euros):" style="font-weight:bold"/>
+                            <p:inputNumber id="capitalSocial" 
+                                         value="#{registerView.capitalSocial}" required="true"
+                                         requiredMessage="Por favor, introduce el capital social de le empresa."
+                                         minValue="0.1"
+                                         validatorMessage="debe ser mayor que 0">
+                            </p:inputNumber>
+                                
+                            <p:message for="capitalSocial"/>
+                        </h:panelGrid>
+                        <p:commandButton action="#{registerView.registerEmpresa()}" update="grid" value="Regístrate!" icon="uiicon-pencil"/>
+                    </p:panel>
+                </h:form>
             </ui:define>
 
         </ui:composition>

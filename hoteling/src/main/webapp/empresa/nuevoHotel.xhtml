@@ -9,58 +9,49 @@
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
+
             <ui:define name="content">
-                    <div class="ui-g ui-fluid">
-                        <div class="ui-g-12 ui-md-3"></div>
-                        <div class="ui-g-12 ui-md-6">
-                            <h:form>
-                                <p:messages id="messages" closable="true"/>
-                                <p:panel header="Nuevo Hotel"  style="text-align:center">
-                                    <h:panelGrid id="grid" columns="2" cellspacing="10" style="width:100%;margin:0px auto;">
+                <h1>Nuevos hoteles</h1>
+              <h:form>
+                  <h:panelGrid id="grid" columns="3">
+                      <h:outputLabel for="name" value="Nombre del Hotel:" style="font-weight:bold"/>
+                      <p:inputText id="name" value="#{hotelesBackingBean.nombreHoteles}" required="true"
+                                   requiredMessage="Por favor, introduce el nombre del hotel." maxlength="30" />
+                      <p:message for="name"/> 
+                      <h:outputLabel for="ciudad" value="Nombre de la ciudad:" style="font-weight:bold"/>
+                      <p:inputText id="ciudad" value="#{hotelesBackingBean.ciudadHoteles}" required="true"
+                                   requiredMessage="Por favor, introduce la ciudad en la que se encuentre el hotel." maxlength="30"/>
+                      <p:message for="ciudad"/>
+                      
+                      <h:outputLabel for="numHabitaciones" value=" Numero de habitaciones disponibles:" style="font-weight:bold"/>
+                      <p:inputNumber id="numHabitaciones" 
+                                     value="#{hotelesBackingBean.numHabitacionesHoteles}" required="true"
+                                     requiredMessage="Por favor, introduce el numero de habitaciones disponibles"
+                                     minValue="0.1"
+                                     validatorMessage="debe ser mayor que 0">
+                      </p:inputNumber>
 
-                                        <h:outputLabel for="nombre" value="Nombre Hotel:" style="font-weight:bold"/>
-                                        <p:inputText id="nombre" value="#{hotelesBackingBean.nombreHoteles}" required="true"
-                                                     requiredMessage="Por favor, introduce el nombre del Hotel." maxlength="50" />
+                      <p:message for="numHabitaciones"/>
+                      <h:outputLabel for="precioHabitacion" value="precio de cada habitación (Euros):" style="font-weight:bold"/>
+                      <p:inputNumber id="precioHabitacion" 
+                                     value="#{hotelesBackingBean.precioHabitacionHoteles}" required="true"
+                                     requiredMessage="Por favor, introduce el capital social de le empresa."
+                                     minValue="0.1"
+                                     validatorMessage="debe ser mayor que 0">
+                      </p:inputNumber>
+                      <p:message for="precioHabitacion"/>
+                      <h:outputLabel for="servicios" value="Introduzca los servicios del hotel:" style="font-weight:bold"/>
+                      <p:inputText id="servicios" value="#{hotelesBackingBean.servicios}" required="true"
+                                   requiredMessage="Por favor, introduce los servicios disponibles." maxlength="30"/>
+                      <p:message for="servicios"/>
+                  </h:panelGrid>
+                  <p:commandButton value="Añadir" action="listadoHoteles" actionListener="#{hotelesClientBean.addHotel()}"/>
+                   
+                </h:form>
+                <p:commandButton value="Back" action="listadoHoteles" icon="ui-icon-arrowrefresh-1-w"/>
+            </ui:define>
 
-                                        <h:outputLabel for="ciudad" value="Ciudad:" style="font-weight:bold"/>
-                                        <p:inputText id="ciudad" value="#{hotelesBackingBean.ciudadHoteles}" required="true"
-                                                    requiredMessage="Por favor, introduce la ciudad." maxlength="50"/>
-                                        
-                                        
-                                        <h:outputLabel for="numHabitaciones" value="Num habitaciones" style="font-weight:bold"/>
-                                        <p:inputNumber id="numHabitaciones" 
-                                                       value="#{hotelesBackingBean.numHabitacionesHoteles}" required="true"
-                                                       requiredMessage="Por favor, introduce el numero de habitaciones disponibles"
-                                                       minValue="1"
-                                                       validatorMessage="debe ser mayor que 0">
-                                        </p:inputNumber>
-                                        
-                                        <h:outputLabel for="precioHabitacion" value="precio de cada habitación (Euros):" style="font-weight:bold"/>
-                                        <p:inputNumber id="precioHabitacion" 
-                                                       value="#{hotelesBackingBean.precioHabitacionHoteles}" required="true"
-                                                       requiredMessage="Por favor, introduce el capital social de le empresa."
-                                                       minValue="0.1"
-                                                       validatorMessage="debe ser mayor que 0">
-                                        </p:inputNumber>
-                                        <h:outputLabel for="servicios" value="Introduzca los servicios del hotel:" style="font-weight:bold"/>
-                                        <p:inputText id="servicios" value="#{hotelesBackingBean.servicios}" required="true"
-                                                     requiredMessage="Por favor, introduce los servicios disponibles." maxlength="50"/>
-                                        
-                                        <p:commandButton value="Añadir" action="listadoHoteles" actionListener="#{hotelesClientBean.addHotel()}" update="messages"/>
-                                        <p:commandButton value="Back" action="listadoHoteles.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
-                                    </h:panelGrid>
-
-                                </p:panel>
-
-                            </h:form>
-                            
-                        </div>
-                        <div class="ui-g-12 ui-md-3"></div>
-                    </div>
-
-                </ui:define>
         </ui:composition>
-            
 
     </body>
 </html>

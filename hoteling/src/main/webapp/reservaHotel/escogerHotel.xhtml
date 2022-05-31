@@ -52,35 +52,31 @@
                                 </f:facet>
                                 <h:outputText value="#{item.emailempresa}" />
                             </p:column>
-
-
+                            
+                            
                         </p:dataTable>
                     </h:form>
                 </f:view>
-
-                <div class="ui-g-12 ui-md-4"></div>
-                <div class="ui-g-12 ui-md-4">
-                    <p:panel >
-                        <h:form>
-                        <h:panelGrid id="grid1" columns="3" cellspacing="10" style="width:100%;margin:0px auto;">
-                            <h:outputText value="Escoja una opcion" style="text-align:right"/>
-                             <h:selectOneMenu id="questionStatus" value="#{reservaHotel.idHotel}" > 
-                                 <c:forEach items="#{reservaHotel.hotelesCiudades}" var="m">
-                                     <f:selectItem itemValue="#{m.id}" itemLabel="#{m.id}" />
-                                 </c:forEach>
-                             </h:selectOneMenu>
-                             <p:commandButton value="Escoger Hotel" action="datosReserva.xhtml" />
-                        </h:panelGrid>
-                        </h:form>
-                    </p:panel>
-                    <p:panel >
-                        <p:commandButton value="Back" action="reservaHotel" icon="ui-icon-arrowrefresh-1-w"/>
-                    </p:panel>
-                </div>
-                <div class="ui-g-12 ui-md-4"></div>
-
-
-
+                <f:view>
+                    <h:form>
+                        <h:dataTable value="hola" var="item">
+                            <h:column>
+                                <h2><h:outputText value="Escoja una opcion"/></h2>
+                            </h:column>
+                            <h:column>
+                                <h:selectOneMenu id="questionStatus" value="#{reservaHotel.idHotel}" > 
+                                    <c:forEach items="#{reservaHotel.hotelesCiudades}" var="m">
+                                        <f:selectItem itemValue="#{m.id}" itemLabel="#{m.id}" />
+                                    </c:forEach>
+                                </h:selectOneMenu>
+                            </h:column> 
+                            <h:column>
+                                <p:commandButton value="Escoger Hotel" action="datosReserva.xhtml" />
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
+                <p:commandButton value="Back" action="reservaHotel" icon="ui-icon-arrowrefresh-1-w"/>
             </ui:define>
 
         </ui:composition>

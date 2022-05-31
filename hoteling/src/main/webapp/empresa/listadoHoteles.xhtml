@@ -10,63 +10,52 @@
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
+
             <ui:define name="content">
+                
                 <f:view>
                     <h:form>
-                        <h:panelGrid id="grid" columns="3">
-
-
-                            <p:dataTable id="table" value="#{hotelesClientBean.hoteles}" var="item">
+                        <h1><h:outputText value="Listado de hoteles"/></h1>
+                        <p:dataTable id="table" value="#{hotelesClientBean.hoteles}"  var="item">
+                            <p:column>
                                 <f:facet name="header">
-                                    Listado de Hoteles
+                                    <h:outputText value="Id"/>
                                 </f:facet>
-
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Id"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.id}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.nombre}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Ciudad"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.ciudad}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Num Habitaciones"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.numhabitaciones}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Precio Habitacion"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.preciohabitacion}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="email Empresa"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.emailempresa}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Ciudad"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.servicios}"/>
-                                </p:column>
-                                
-
-                            </p:dataTable>
-                        </h:panelGrid>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Ciudad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ciudad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Numero de Habitaciones"/>
+                                </f:facet>
+                                <h:outputText value="#{item.numhabitaciones}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="precio por habitacion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.preciohabitacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="EmailEmpresa"/>
+                                </f:facet>
+                                <h:outputText value="#{item.emailempresa}" />
+                            </p:column>
+                            
+                            
+                        </p:dataTable>
                     </h:form>
                 </f:view>
                 <f:view>
@@ -84,17 +73,18 @@
                             </h:column> 
                             <h:column>
                                 <p:commandButton value="Moficar" action="modificarHotel.xhtml" actionListener="#{hotelesClientBean.auxModificarHotel()}" />
-                                <p:commandButton value="Borrar" action="borrarHotel.xhtml" />
+                                <p:commandButton value="Borrar" action="/empresa/borrarHotel.xhtml"/>
+                                
                             </h:column>
                             <h:column>
-                                <p:commandButton value="Nueva Hotel"  action="nuevoHotel" immediate="true"/>
+                                <p:commandButton value="Añadir Hotel"  action="nuevoHotel.xhtml" immediate="true"/>
                             </h:column>
-
+                            
                         </h:dataTable>
                     </h:form>
                 </f:view>
+
             </ui:define>
-            
 
         </ui:composition>
 

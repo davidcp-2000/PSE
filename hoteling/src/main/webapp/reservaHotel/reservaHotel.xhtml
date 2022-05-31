@@ -9,37 +9,25 @@
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
-            <ui:define name="content">
-                <div class="ui-g ui-fluid">
-                    <div class="ui-g-12 ui-md-3"></div>
-                    <div class="ui-g-12 ui-md-6">
-                        <h:form>
-                            <p:panel header="Eleccion ciudad donde reservar"  style="text-align:center">
-                                <h:panelGrid id="grid" columns="1" cellspacing="10" style="width:100%;margin:0px auto;">
-                                    <h:selectOneRadio value="#{reservaHotel.ciudad}"
-                                                      layout="pageDirection"
-                                                      required="true">
-                                        <f:selectItems value="#{reservaHotel.ciudadesDisponibles}"
-                                                       var="m"
-                                                       itemValue="#{m}"
-                                                       itemLabel="#{m}"/>
-                                    </h:selectOneRadio>
-                                    <p:commandButton id="shows" value="escoger ciudad" action="escogerHotel.xhtml"/> 
-                                </h:panelGrid>
-                            </p:panel>
-                        </h:form>
-                        <p:panel>
-                            <h:panelGrid id="grid" columns="1" cellspacing="10" style="width:100%;margin:0px auto;">
-                                <p:commandButton value="Back" action="/cliente/listadoReservas.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
-                            </h:panelGrid>
-                        </p:panel>
-                        
-                    </div>
-                    <div class="ui-g-12 ui-md-3"></div>
-                </div>
 
+            <ui:define name="content">
+                <h2>Selecciona una ciudad</h2>
+                <f:view>
+                    <h:form>
+                        <h:selectOneRadio value="#{reservaHotel.ciudad}"
+                                      layout="pageDirection"
+                                      required="true">
+                            <f:selectItems value="#{reservaHotel.ciudadesDisponibles}"
+                                       var="m"
+                                       itemValue="#{m}"
+                                       itemLabel="#{m}"/>
+                    </h:selectOneRadio>
+                        <p:commandButton id="shows" value="escoger ciudad" action="escogerHotel.xhtml"/>
+                </h:form>
+                    <p:commandButton value="Back" action="/cliente/listadoReservas.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
+                </f:view>
+               
             </ui:define>
-            
 
         </ui:composition>
 
