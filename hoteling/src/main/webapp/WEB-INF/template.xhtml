@@ -45,17 +45,31 @@
                 <p:layoutUnit position="west" size="200" header="Menú" collapsible="true">
                     <h:form>
                         <p:menu>
-                            <p:menuitem value="Inicio" outcome="/index.xhtml" icon="ui-icon-home" />
+                            <!-- paginas accesibles sin inicio de sesion, y no se mostraran cuando se inicie sesion -->
+                            <p:menuitem value="Inicio" outcome="/index.xhtml" icon="ui-icon-home" 
+                                        rendered="#{request.isUserInRole('cliente')==false and request.isUserInRole('empresa')==false}"/>
                             
-                            <p:menuitem value="Iniciar Sesión" outcome="/login.xhtml"
-                                        rendered="#{request.isUserInRole('cliente')==false}" icon="ui-icon-key"/>
-                            <p:menuitem value="Registro Empresas Hoteleras" outcome="/registroEmpresa.xhtml"
-                                        rendered="#{request.isUserInRole('cliente')==false}" icon="ui-icon-pencil"/>
-                            <p:menuitem value="Registro usuarios" outcome="/registroCliente.xhtml"
-                                        rendered="#{request.isUserInRole('cliente')==false}" icon="ui-icon-pencil"/>
-                            <p:submenu label ="Usuario" rendered="#{request.isUserInRole('cliente')}">
-                                <p:menuitem value="reservaHotel" action="reservaHotel" icon="ui-icon-cart"/>
-                            </p:submenu>
+                            <p:menuitem value="Registro Empresas" outcome="/registroEmpresa.xhtml"
+                                        rendered="#{request.isUserInRole('cliente')==false and request.isUserInRole('empresa')==false}" />
+                            <p:menuitem value="Registro Usuarios" outcome="/registroCliente.xhtml"
+                                        rendered="#{request.isUserInRole('cliente')==false and request.isUserInRole('empresa')==false}" />
+                            
+                            
+                            
+                            <!-- paginas Solo para usuarios -->
+                             <p:menuitem value="Inicio" action="listadoReservas"  rendered="#{request.isUserInRole('cliente')}" />
+                             <p:menuitem value="reservaHotel" action="reservaHotel"  rendered="#{request.isUserInRole('cliente')}" />
+                            
+                            <!-- paginas no accesibles sin inicio de sesion, se mostrara cuando cliente o empresa inicie sesion -->
+                             
+                            <p:menuitem value="Chat" outcome="/chat/chatroom.xhtml" 
+                                        rendered="#{request.isUserInRole('cliente')==true or request.isUserInRole('empresa')==true}"/>
+                            
+                            
+                            <!-- hasta aqui va biene le p:menu -->
+                            
+                            
+                            
                             <p:submenu label ="Administrador" rendered="#{request.isUserInRole('admininistrador')}">
                                 <p:menuitem value="Hoteles1" outcome="/empresa/listadoHoteles.xhtml" icon="ui-icon-calculator"/>
                             </p:submenu>

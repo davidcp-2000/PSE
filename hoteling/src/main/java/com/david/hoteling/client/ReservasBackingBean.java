@@ -5,6 +5,7 @@
  */
 package com.david.hoteling.client;
 
+import com.david.hoteling.entities.Hoteles;
 import java.io.Serializable;
 import java.util.Date;
 import javax.enterprise.context.SessionScoped;
@@ -22,7 +23,15 @@ public class ReservasBackingBean implements Serializable{
     int idHotel;
     String Tarjeta;
     String email;
-    
+    Hoteles h;
+
+    public Hoteles getH() {
+        return h;
+    }
+
+    public void setH(Hoteles h) {
+        this.h = h;
+    }
     
     public Date getFecha() {
         return fecha;

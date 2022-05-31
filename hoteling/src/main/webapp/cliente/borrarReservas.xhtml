@@ -9,45 +9,77 @@
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
-
             <ui:define name="content">
-                <h1>Borrar Reserva </h1>
-                <h:form>
-                    <p:dataTable id="table" value="#{reservasClientBean.reserva}"  var="item">
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Fecha"/>
-                                </f:facet>
-                                <h:outputText value="#{item.fecha}" >
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Tarjeta"/>
-                                </f:facet>
-                                <h:outputText value="#{item.tarjeta}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Email"/>
-                                </f:facet>
-                                <h:outputText value="#{item.emailusuarios}"/>
-                            </p:column>
+            <f:view>
+                    <h:form>
+                        <h:panelGrid id="grid" columns="3">
 
 
-                        </p:dataTable>
-                    <p:commandButton value="Confirmar" action="listadoReservas.xhtml" actionListener="#{reservasClientBean.deleteReserva()}"/>
-                    <p:commandButton value="Back" action="listadoReservas.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
-                </h:form>
+                            <p:dataTable id="table" value="#{reservasClientBean.reserva}" var="item">
+                                <f:facet name="header">
+                                    Borrar Hotel
+                                </f:facet>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fecha}" >
+                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Tarjeta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.tarjeta}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{reservasClientBean.auxGetHotel(item.hotel).getNombre()}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ciudad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{reservasBackingBean.h.ciudad}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio Habitacion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{reservasBackingBean.h.preciohabitacion}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="email Empresa"/>
+                                    </f:facet>
+                                    <h:outputText value="#{reservasBackingBean.h.emailempresa}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ciudad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{reservasBackingBean.h.servicios}"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:panelGrid>
+                        <p:commandButton value="Confirmar" action="listadoReservas" actionListener="#{reservasClientBean.deleteReserva()}"/>
+                    <p:commandButton value="Back" action="listadoReservas" icon="ui-icon-arrowrefresh-1-w"/>
+                    </h:form>
+                </f:view>
+
             </ui:define>
-
+           
         </ui:composition>
 
     </body>

@@ -9,54 +9,70 @@
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
-
             <ui:define name="content">
-                <h1>Borrar hotel </h1>
-                <h:form>
-                    <p:dataTable id="table" value="#{hotelesClientBean.hotel}"  var="item">
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nombre"/>
-                                </f:facet>
-                                <h:outputText value="#{item.nombre}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Ciudad"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ciudad}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Numero de Habitaciones"/>
-                                </f:facet>
-                                <h:outputText value="#{item.numhabitaciones}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="precio por habitacion"/>
-                                </f:facet>
-                                <h:outputText value="#{item.preciohabitacion}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="EmailEmpresa"/>
-                                </f:facet>
-                                <h:outputText value="#{item.emailempresa}" />
-                            </p:column>
-                            
-                            
-                        </p:dataTable>
-                    <p:commandButton value="Confirmar" action="listadoHoteles" actionListener="#{hotelesClientBean.deleteHotel()}"/>
+            <f:view>
+                    <h:form>
+                        <h:panelGrid id="grid" columns="3">
+
+
+
+                                <p:dataTable id="table" value="#{hotelesClientBean.hotel}"  var="item">
+                                     <f:facet name="header">
+                                    Borrar Hotel
+                                    </f:facet>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Id"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.id}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombre}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Ciudad"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ciudad}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Numero de Habitaciones"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.numhabitaciones}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="precio por habitacion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.preciohabitacion}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="EmailEmpresa"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.emailempresa}" />
+                                    </p:column>
+
+
+                                </p:dataTable>
+                        </h:panelGrid>
+                        <p:commandButton value="Confirmar" action="listadoHoteles" actionListener="#{hotelesClientBean.deleteHotel()}"/>
                     <p:commandButton value="Back" action="listadoHoteles.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
-                </h:form>
+                    </h:form>
+                </f:view>
+
             </ui:define>
+            
+            
+            
+            
+            
+            
+            
 
         </ui:composition>
 

@@ -10,9 +10,40 @@
 
         <ui:composition template="./WEB-INF/template.xhtml">
             <ui:define name="content">
-                inicio de sesión
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-3"></div>
+                    <div class="ui-g-12 ui-md-6">
+                        <h:form>
+                            <p:messages id="messages" closable="true"/>
+                            <p:panel header="Acceso de usuario"  style="text-align:center">
+                                <h:panelGrid id="grid" columns="2" cellspacing="10" style="width:100%;margin:0px auto;">
+
+                                    <h:outputLabel for="email" value="E-Mail:" style="font-weight:bold"/>
+                                    <p:inputText id="email" value="#{loginView.email}" required="true"
+                                                 requiredMessage="Por favor, introduce tu email." maxlength="200" />
+
+                                    <h:outputLabel for="password" value="Contraseña:" style="font-weight:bold"/>
+                                    <p:password id="password" value="#{loginView.password}" required="true"
+                                                requiredMessage="Por favor, introduce tu contraseña." maxlength="50"/>
+                                </h:panelGrid>
+                                <p:commandButton action="#{loginView.login()}" value="Login"  update="messages"/>
+
+                            </p:panel>
+
+                        </h:form>
+                        <p:panel >
+                            <h:panelGrid id="grid2" columns="2" cellspacing="10" style="width:100%;margin:0px auto;">
+                                <p:commandButton action="registroCliente" value="Registro Usuario"/>
+                                <p:commandButton action="registroEmpresa" value="Registro Empresa"/>
+                            </h:panelGrid>
+                        </p:panel>
+                        
+                    </div>
+                    <div class="ui-g-12 ui-md-3"></div>
+                </div>
+
             </ui:define>
-           
+
 
         </ui:composition>
 

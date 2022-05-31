@@ -12,7 +12,8 @@
 
             <ui:define name="content">
                 <f:view>
-                    <h:form>
+                <h:form id="info">
+                
                 <h1><h:outputText value="Listado de hoteles"/></h1>
                 <p:dataTable id="table" value="#{reservaHotel.hotel}"  var="item">
                             <p:column>
@@ -56,21 +57,39 @@
                         </p:dataTable>
                     </h:form>
                 </f:view>
-                <h:form prependId="false">
-                    <h:panelGrid columns="3" id="grid">
-                        <p:outputLabel for="tarjeta" value="Tarjeta de credito"/>
-                        <p:inputMask id="tarjeta" value="#{reservaHotel.tarjeta}" mask="9999999999999999" required="true" requiredMessage="#{reservaHotel.autorizarReserva}"/>
-                        <p:message for="tarjeta"/>
-                        <p:outputLabel for="fecha" value="Fecha de la reserva:"/>
-                        <p:datePicker id="fecha" value="#{reservaHotel.fecha}" pattern="yyyy-MM-dd" locale="es"
-                                      yearNavigator="true" yearRange="2020:2030" />
-                        <p:message for="fecha"/>
-                    </h:panelGrid>
-                    <p:commandButton value="Completar Reserva" action="#{reservaHotel.addReserva()}"/>
-                    <p:commandButton id="back" value="Atrás" action="confirm" icon="ui-icon-arrowrefresh-1-w"
-                                     immediate="true"/>
-                </h:form>
-                <p:commandButton value="Back" action="escogerHotel.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-3"></div>
+                    <div class="ui-g-12 ui-md-6">
+                        <h:form>
+                            <f:event listener="#{reservaHotel.confirmarTarjeta}" type="postValidate" />
+                            <p:messages id="messages" closable="true"/>
+                            <p:panel header="Introduzca los datos de reserva" style="text-align:center ">
+                                <h:panelGrid id="grid" columns="3" cellspacing="10" style="width:100%;margin:0px auto; font-weight:bold">
+                                    
+                                    <p:outputLabel for="tarjeta" value="Tarjeta de credito"/>
+                                    <p:inputMask id="tarjeta" value="#{reservaHotel.tarjeta}" mask="9999999999999999" required="true" requiredMessage="este campo es obligatorio"/>
+                                    <p:message for="tarjeta"/>
+                                    
+                                    <p:outputLabel for="fecha" value="Fecha de la reserva"/>
+                                    <p:datePicker id="fecha" value="#{reservaHotel.fecha}" pattern="yyyy-MM-dd" locale="es" required="true"
+                                                  yearNavigator="true" yearRange="1950:#{registerView.fechaMaximo()}" maxdate="#{registerView.fechaMaximo()}" 
+                                                  requiredMessage="Por favor, introduce la fecha de reserva."/>
+                                    <p:message for="fecha"/>
+                                     
+                                </h:panelGrid>
+                                <p:commandButton value="Completar Reserva" action="#{reservaHotel.addReserva()}" update="messages"/>
+                            </p:panel>
+                        </h:form>
+                        <p:panel >
+                            <h:panelGrid id="grid2" columns="2" cellspacing="10" style="width:100%;margin:0px auto;">
+                                <p:commandButton value="Back" action="escogerHotel.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
+                            </h:panelGrid>
+                        </p:panel>
+
+                    </div>
+                    <div class="ui-g-12 ui-md-3"></div>
+                </div>
+                
             </ui:define>
 
         </ui:composition>
